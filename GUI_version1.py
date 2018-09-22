@@ -24,7 +24,7 @@ class Recording(object):
         self.wavefile = self._prep_file(self.fname)
         self._stream = None
 
-    #I'm not sure 
+    #I'm not sure sure what these next two functions are for unless they have something to do with creating and destroying the object, they never seem to run. However, when I was looking into how to do this callback online this is how they recommended that I organize the code
 
 
     def __enter__(self):
