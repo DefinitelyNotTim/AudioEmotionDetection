@@ -81,16 +81,16 @@ class Application(Frame):
         self.stopButton = Button(self, text = " Stop recording    " , justify = "left", command = self.endAudio)
         self.stopButton.grid()
         
-        self.playButton = Button(self, text = "Play Recorded Audio", justify = "left")
+        self.playButton = Button(self, text = "Play Recorded Audio", justify = "left", command = self.playAudio)
         self.playButton.grid()
 
-        self.saveButton = Button (self, text = "Save Audio    ", justify = "left")
+        self.saveButton = Button (self, text = "Save Audio    ", justify = "left", command = self.saveAudio)
         self.saveButton.grid()
 
-        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left")
+        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left", command = self.deleteAudio)
         self.deleteButton.grid()
 
-        self.processButton = Button(self,text = "Process Emotion  ", justify = "left")
+        self.processButton = Button(self,text = "Process Emotion  ", justify = "left", command = self.processAudio)
         self.processButton.grid()
 
         self.txt = Entry(self, width = 20)
