@@ -98,6 +98,18 @@ class Application(Frame):
 
         self.label = Label(self, text = "User Name")
         self.label.grid(column = 1, row = 0)
+        
+        self.label = Label(self, text = "User Name:")
+        self.label.grid(column = 2, row = 0)
+
+        self.text = Entry(self, width = 20)
+        self.text.grid(column = 3, row = 0)
+        
+        self.label = Label (self, text = "Emotion:")
+        self.label.grid(column = 2, row = 1)
+
+        self.text = Entry(self, width = 20)
+        self.text.grid(column = 3, row = 1)
 
     def recordAudio(self):
         self.recorder.startAudio()
