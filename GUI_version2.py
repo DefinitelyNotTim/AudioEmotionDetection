@@ -1,7 +1,6 @@
 #Gui interface for Audio Emotional detection program CSC-450 Michael Knapp
-
-from tkinter import *
 import pyaudio
+from tkinter import *
 import Recording
 import emotionProcessor
 
@@ -9,11 +8,13 @@ CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
+record_seconds = 10
 wave_output_filename = "test.wav"
 
 
-#create the window for the GUI
 
+
+#create the window for the GUI
 
 class Application(Frame):
     def __init__(self,master):
@@ -31,16 +32,16 @@ class Application(Frame):
         self.stopButton = Button(self, text = " Stop recording    " , justify = "left", command = self.endAudio)
         self.stopButton.grid()
         
-        self.playButton = Button(self, text = "Play Recorded Audio", justify = "left", command = self.playAudio)
+        self.playButton = Button(self, text = "Play Recorded Audio", justify = "left")
         self.playButton.grid()
 
-        self.saveButton = Button (self, text = "Save Audio    ", justify = "left", command = self.saveAudio)
+        self.saveButton = Button (self, text = "Save Audio    ", justify = "left")
         self.saveButton.grid()
 
-        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left", command = self.deleteAudio)
+        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left")
         self.deleteButton.grid()
 
-        self.processButton = Button(self,text = "Process Emotion  ", justify = "left", command = self.processAudio)
+        self.processButton = Button(self,text = "Process Emotion  ", justify = "left", command = self.emoProc)
         self.processButton.grid()
 
         self.txt = Entry(self, width = 20)
@@ -48,18 +49,6 @@ class Application(Frame):
 
         self.label = Label(self, text = "User Name")
         self.label.grid(column = 1, row = 0)
-        
-        self.label = Label(self, text = "User Name:")
-        self.label.grid(column = 2, row = 0)
-
-        self.text = Entry(self, width = 20)
-        self.text.grid(column = 3, row = 0)
-        
-        self.label = Label (self, text = "Emotion:")
-        self.label.grid(column = 2, row = 1)
-
-        self.text = Entry(self, width = 20)
-        self.text.grid(column = 3, row = 1)
 
     def recordAudio(self):
         self.recorder.startAudio()
@@ -67,15 +56,11 @@ class Application(Frame):
     def endAudio(self):
         self.recorder.stopAudio()
         return self
-    def processAudio(self):
+    def emoProc(self):
+        
         self.processor.pitchProc()
         return self
-    def playAudio(self):
-        return self
-    def saveAudio(self):
-        return self
-    def deleteAudio(self):
-        return self
+        
         
     
 
