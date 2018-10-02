@@ -25,22 +25,22 @@ class Application(Frame):
     
 
     def create_widgets(self):
-        self.startButton = Button(self, text = " Start recording    " , justify = "left", command = self.recordAudio).pack()
+        self.startButton = Button(self, text = " Start recording" , justify = "left", command = self.recordAudio).pack()
         self.startButton.grid(row = 0, column = 0)
 
-        self.stopButton = Button(self, text = " Stop recording    " , justify = "left", command = self.endAudio).pack()
+        self.stopButton = Button(self, text = " Stop recording" , justify = "left", command = self.endAudio).pack()
         self.stopButton.grid(row = 1, column = 0)
         
         self.playButton = Button(self, text = "Play Recorded Audio", justify = "left", command = self.playAudio).pack()
         self.playButton.grid(row = 2 , column = 0)
 
-        self.saveButton = Button (self, text = "Save Audio    ", justify = "left", command = self.saveAudio).pack()
+        self.saveButton = Button (self, text = "Save Audio", justify = "left", command = self.saveAudio).pack()
         self.saveButton.grid(row = 3, column = 0)
 
-        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left", command = self.deleteAudio).pack()
+        self.deleteButton = Button (self,text = "Delete Audio", justify = "left", command = self.deleteAudio).pack()
         self.deleteButton.grid(row = 4, column = 0)
 
-        self.processButton = Button(self,text = "Process Emotion  ", justify = "left", command = self.processAudio).pack()
+        self.processButton = Button(self,text = "Process Emotion", justify = "left", command = self.processAudio).pack()
         self.processButton.grid(row = 5, column = 0)
 
         self.txt = Entry(self, width = 20)
