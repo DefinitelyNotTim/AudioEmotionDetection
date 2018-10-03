@@ -4,7 +4,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import Menu
-from tkinter import messagebox as mbox
+from tkinter import messagebox as mbox # needed for using the POPUP window for YES NO CANCEL new user recordings
 
 app = tk.Tk()
 #Title for the GUI
@@ -24,7 +24,7 @@ app.config(menu=menuBar)
 
 #display a Yes or No or Cancel Box
 def _msgBox():
-    mbox.askyesnocancel('Yes or No or Cancel action Box', 'Choose the Action')
+    mbox.askyesnocancel('Yes or No or Cancel action Box', 'Would you like to save this recording?')
 #create the message menu
 msgMenu = Menu(menuBar, tearoff=0)
 msgMenu.add_command(label= "Close", command =_msgBox)
