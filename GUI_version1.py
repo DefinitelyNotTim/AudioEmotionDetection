@@ -12,8 +12,8 @@ RATE = 44100
 wave_output_filename = "test.wav"
 
 
-#create the window for the GUI
-
+# create the window for the GUI
+# this class sets up the frame which is the entire window needed to fit the GUI buttons and lable's inside.
 
 class Application(Frame):
     def __init__(self,master):
@@ -23,7 +23,11 @@ class Application(Frame):
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.processor=emotionProcessor.EmotionProcessor(wave_output_filename)
     
-
+   # class widgets.. this is where the code for each off six buttons two lable's and two text boxes are held.
+   # .pack()= makes the button fit to the entire collumn not just the size of the text inside the button.
+   # grid= where is that button on lable located in the frame.
+   # each button has a command atribute that connects the button with a function that controls what the button does.
+   
     def create_widgets(self):
         self.startButton = Button(self, text = " Start recording    " , justify = "left", command = self.recordAudio).pack()
         self.startButton.grid(row = 0, column = 0)
@@ -60,7 +64,7 @@ class Application(Frame):
 
         self.text = Entry(self, width = 20)
         self.text.grid(column = 3, row = 1)
-
+# attaching the command of each button to the correct function that needs to fire when a button is pressed.
     def recordAudio(self):
         self.recorder.startAudio()
         return self
@@ -83,7 +87,7 @@ class Application(Frame):
 #modify root window
 root = Tk()
 root.title("Audio Control GUI")
-root.geometry ("300x200")
+root.geometry ("300x200") # the size of the whole frame
 app = Application(root)
 
 #kick off the event loop
