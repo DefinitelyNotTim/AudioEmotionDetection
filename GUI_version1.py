@@ -9,7 +9,7 @@ CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
-wave_output_filename = "test.wav"
+wave_output_filename = 'test.wav'
 
 
 # create the window for the GUI
@@ -29,22 +29,22 @@ class Application(Frame):
    # each button has a command atribute that connects the button with a function that controls what the button does.
    
     def create_widgets(self):
-        self.startButton = Button(self, text = " Start recording    " , justify = "left", command = self.recordAudio).pack()
+        self.startButton = Button(self, text = " Start recording    " , justify = "left", command = self.recordAudio)
         self.startButton.grid(row = 0, column = 0)
 
-        self.stopButton = Button(self, text = " Stop recording    " , justify = "left", command = self.endAudio).pack()
+        self.stopButton = Button(self, text = " Stop recording    " , justify = "left", command = self.endAudio)
         self.stopButton.grid(row = 1, column = 0)
         
-        self.playButton = Button(self, text = "Play Recorded Audio", justify = "left", command = self.playAudio).pack()
+        self.playButton = Button(self, text = "Play Recorded Audio", justify = "left", command = self.playAudio)
         self.playButton.grid(row = 2 , column = 0)
 
-        self.saveButton = Button (self, text = "Save Audio    ", justify = "left", command = self.saveAudio).pack()
+        self.saveButton = Button (self, text = "Save Audio    ", justify = "left", command = self.saveAudio)
         self.saveButton.grid(row = 3, column = 0)
 
-        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left", command = self.deleteAudio).pack()
+        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left", command = self.deleteAudio)
         self.deleteButton.grid(row = 4, column = 0)
 
-        self.processButton = Button(self,text = "Process Emotion  ", justify = "left", command = self.processAudio).pack()
+        self.processButton = Button(self,text = "Process Emotion  ", justify = "left", command = self.processAudio)
         self.processButton.grid(row = 5, column = 0)
 
         self.txt = Entry(self, width = 20)
@@ -73,6 +73,7 @@ class Application(Frame):
         return self
     def processAudio(self):
         self.processor.pitchProc()
+        self.processor.volumeProc()
         return self
     def playAudio(self):
         return self
