@@ -9,7 +9,7 @@ CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
-wave_output_filename = "test.wav"
+wave_output_filename = 'test.wav'
 
 
 # create the window for the GUI
@@ -73,6 +73,8 @@ class Application(Frame):
         return self
     def processAudio(self):
         self.processor.pitchProc()
+        self.processor.volumeProc()
+        self.processor.mfccProc()
         return self
     def playAudio(self):
         return self
