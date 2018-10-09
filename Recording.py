@@ -1,5 +1,6 @@
 import pyaudio
 import wave
+import emotionProcessor
 
 wave_output_filename = "test.wav"
 
@@ -12,6 +13,7 @@ class Recording(object):
         self._p = pyaudio.PyAudio()
         self.wavefile = self._prep_file(self.fname)
         self._stream = None
+        self.extractedData = [[]]
 
 
     def __enter__(self):
@@ -51,3 +53,6 @@ class Recording(object):
         waveFile.setsampwidth(self._p.get_sample_size(pyaudio.paInt16))
         waveFile.setframerate(self.rate)
         return waveFile
+
+    def extractData(self):
+        
