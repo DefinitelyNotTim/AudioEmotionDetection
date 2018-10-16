@@ -1,7 +1,7 @@
 #Gui interface for Audio Emotional detection program CSC-450 Michael Knapp
 
 from tkinter import *
-import tkinter as tkS
+import tkinter as tk
 import pyaudio
 import Recording
 import emotionProcessor
