@@ -2,14 +2,14 @@
 
 from tkinter import *
 import tkinter as tkS
-#import pyaudio
-#import Recording
-#import emotionProcessor
+import pyaudio
+import Recording
+import emotionProcessor
 from tkinter import Menu
 from tkinter import messagebox as mbox
 
 CHUNK = 1024
-#FORMAT = pyaudio.paInt16
+FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 wave_output_filename = "test.wav"
