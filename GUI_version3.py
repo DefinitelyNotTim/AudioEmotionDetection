@@ -56,6 +56,9 @@ class Application(Frame):
         self.label = Label(self, text = "User Name")
         self.label.grid(column = 1, row = 0)
         
+        #not sure who put this in here but I removed them because we shouldn't need more than user at a time. 
+        #this goes for both lable and entry box. 
+        
         #self.label = Label(self, text = "User Name:")
         #self.label.grid(column = 2, row = 0)
 
