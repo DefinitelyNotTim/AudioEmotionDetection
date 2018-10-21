@@ -2,19 +2,18 @@
 
 from tkinter import *
 import tkinter as tk
-#import pyaudio
-#import Recording
-#import emotionProcessor
+import pyaudio
+import Recording
+import emotionProcessor
 from tkinter import Menu
 from tkinter import messagebox as mbox
 
 CHUNK = 1024
-#FORMAT = pyaudio.paInt16
+FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 wave_output_filename = "test.wav"
 
-#app = tk.Tk()
 # create the window for the GUI
 # this class sets up the frame which is the entire window needed to fit the GUI buttons and lable's inside.
 
