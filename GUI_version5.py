@@ -21,7 +21,9 @@ wave_output_filename = "test.wav"
 class Application(Frame):
     def __init__(self,master):
         Frame.__init__(self,master)
-        self.grid(column = 2, row = 5)
+        self.grid(column = 1, row = 5)
+        #self.Style().configure(background = "green")
+        
         self.create_widgets()
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.processor=emotionProcessor.EmotionProcessor(wave_output_filename)
@@ -47,15 +49,16 @@ class Application(Frame):
         self.deleteButton = Button (self,text = "Delete Audio              ", justify = "center", command = self.deleteAudio, bg = "lightgray",fg = 'black')
         self.deleteButton.grid(row = 4, column = 0)
 
-        self.processButton = Button(self,text = "Process Emotion       ", justify = "center", command = self.processAudio,bg = "lightgray", fg = "orange")
+        self.processButton = Button(self,text = "Process Emotion       ", justify = "center", command = self.processAudio,bg = "lightgray", fg = "blue")
         self.processButton.grid(row = 5, column = 0)
 
-        self.txt = Entry(self, width = 20)
-        self.txt.grid(column = 2, row = 0)
 
-        self.label = Label(self, text = "User Name:", font = 13)
+        self.label = Label(self, text = "User Name:               ", font = 13, justify = "left",bg ="green2")
         self.label.grid(column = 1, row = 0)
+
         
+        self.txt = Entry(self, width = 32)
+        self.txt.grid(column = 1, row = 1)
         #not sure who put this in here but I removed them because we shouldn't need more than user at a time. 
         #this goes for both lable and entry box. 
         
@@ -65,27 +68,27 @@ class Application(Frame):
         #self.text = Entry(self, width = 20)
         #self.text.grid(column = 3, row = 0)
         
-        self.label = Label (self, text = "Emotion:",font = 13)
-        self.label.grid(column = 1, row = 1)
+        self.label = Label (self, text = "Predicted Emotion:    ",font = 13, justify = "left",bg = "green2")
+        self.label.grid(column = 1, row = 2)
 
-        self.text = Entry(self, width = 20)
-        self.text.grid(column = 2, row = 1)
+        self.text = Entry(self, width = 32)
+        self.text.grid(column = 1, row = 3)
 
         chk_state = BooleanVar()
         chk_state.set(True) #set the state of the check button
         chk = Checkbutton(self, text='Check To Train Emotion', var=chk_state)
-        chk.grid(column = 1, row = 2)
+        chk.grid(column = 1, row = 4)
 
-        self.label = Label (self, text = "List of Processed Emotions")
-        self.label.grid(column = 1, row = 3)
-
-        """self.text2 = Text(self, width = 10)
-        self.text2.grid(column =2, row = 3)"""
-        
-        """self.scrollbar = Scrollbar = Scrollbar(self.root)
-        self.scrollbar.pack(x = 100, y = 200)
-        self.outputArea = Text(self.root, height=5, width = 100)
-        self.outputArea.place(x=0,y=120)"""
+        if chk_state == True:
+            menuBar = Menu(app)
+            app.config(menu=menuBar)
+            mbox.askyesnocancel('Yes or No or Cancel action Box', 'Is Predicted Emotion True?')
+            msgMenu = Menu(menuBar, tearoff=0)
+            msgMenu.add_command(label= "Close", command =_msgBox)
+            menuBar.add_cascade(label = "File", menu=msgMenu)
+            app.mainloop()
+            
+        # this is a pop to make sure if the check box for training the emotion (if the predictied emiotion is not correct) this should tell the NN that the classification isn't correct.  
         
         
         
@@ -124,7 +127,7 @@ class Application(Frame):
         return self
     def deleteAudio(self):
         return self
-# all of this is part of the popwindow code added to endAudio function and the recordAudio buttons        
+# all of this is part of the popwindow code added to endAudio function and the recordAudio buttons (left it here to make sure if we need to add another one you can cut and paste.       
 """menuBar = Menu(app)
 app.config(menu=menuBar)
 
@@ -142,8 +145,9 @@ app.mainloop()"""
 
 #modify root window
 root = Tk()
-root.title("Audio Control GUI")
-root.geometry ("400x158") # the size of the whole frame
+root.title("Audio Control Interface")
+root.geometry ("325x158") # the size of the whole frame
+root["bg"] = "green2"
 app = Application(root)
 
 #kick off the event loop
