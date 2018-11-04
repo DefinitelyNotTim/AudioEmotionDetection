@@ -29,22 +29,22 @@ class Application(Frame):
    # each button has a command atribute that connects the button with a function that controls what the button does.
    
     def create_widgets(self):
-        self.startButton = Button(self, text = " Start recording    " , justify = "left", command = self.recordAudio)
+        self.startButton = Button(self, text = " Start: recording          " , justify = "center", command = self.recordAudio, bg = "gray")
         self.startButton.grid(row = 0, column = 0)
 
-        self.stopButton = Button(self, text = " Stop recording    " , justify = "left", command = self.endAudio)
+        self.stopButton = Button(self, text = " Stop: recording          " , justify = "center", command = self.endAudio, bg ="lightgray")
         self.stopButton.grid(row = 1, column = 0)
         
-        self.playButton = Button(self, text = "Play Recorded Audio", justify = "left", command = self.playAudio)
+        self.playButton = Button(self, text = "Play Recorded Audio", justify = "center", command = self.playAudio, bg = "gray")
         self.playButton.grid(row = 2 , column = 0)
 
-        self.saveButton = Button (self, text = "Save Audio    ", justify = "left", command = self.saveAudio)
+        self.saveButton = Button (self, text = "Save Audio                 ", justify = "center", command = self.saveAudio, bg = "lightgray")
         self.saveButton.grid(row = 3, column = 0)
 
-        self.deleteButton = Button (self,text = "Delete Audio   ", justify = "left", command = self.deleteAudio)
+        self.deleteButton = Button (self,text = "Delete Audio              ", justify = "center", command = self.deleteAudio, bg = "gray",fg = 'black')
         self.deleteButton.grid(row = 4, column = 0)
 
-        self.processButton = Button(self,text = "Process Emotion  ", justify = "left", command = self.processAudio)
+        self.processButton = Button(self,text = "Process Emotion       ", justify = "center", command = self.processAudio,bg = "lightgray")
         self.processButton.grid(row = 5, column = 0)
 
         self.txt = Entry(self, width = 20)
@@ -53,17 +53,17 @@ class Application(Frame):
         self.label = Label(self, text = "User Name")
         self.label.grid(column = 1, row = 0)
         
-        self.label = Label(self, text = "User Name:")
-        self.label.grid(column = 2, row = 0)
+        #self.label = Label(self, text = "User Name:")
+        #self.label.grid(column = 2, row = 0)
 
-        self.text = Entry(self, width = 20)
-        self.text.grid(column = 3, row = 0)
+        #self.text = Entry(self, width = 20)
+        #self.text.grid(column = 3, row = 0)
         
         self.label = Label (self, text = "Emotion:")
-        self.label.grid(column = 2, row = 1)
+        self.label.grid(column = 1, row = 1)
 
         self.text = Entry(self, width = 20)
-        self.text.grid(column = 3, row = 1)
+        self.text.grid(column = 2, row = 1)
 # attaching the command of each button to the correct function that needs to fire when a button is pressed.
     def recordAudio(self):
         self.recorder.startAudio()
@@ -87,7 +87,7 @@ class Application(Frame):
 #modify root window
 root = Tk()
 root.title("Audio Control GUI")
-root.geometry ("300x200") # the size of the whole frame
+root.geometry ("400x158") # the size of the whole frame
 app = Application(root)
 
 #kick off the event loop
