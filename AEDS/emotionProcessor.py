@@ -78,7 +78,6 @@ class EmotionProcessor(object):
     # Output: an array containing the lengths of every gap between words
     def gapProc(self):
         sound_file = AudioSegment.from_wav(self.fname)
-        sound_file = AudioSegment.from_wav("english.wav")
         audio_chunks = split_on_silence(sound_file, 
             # must be silent for at least 100ms
             min_silence_len=100,
