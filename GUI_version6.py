@@ -1,5 +1,5 @@
-#Gui interface for Audio Emotional detection program CSC-450 Team:1
-#All needed lib are below most need pip install 
+#Gui interface for Audio Emotional detection program CSC-450 Team:1.
+#All needed lib's are below most need pip install. 
 
 from tkinter import *
 import tkinter as tk
@@ -16,15 +16,14 @@ CHANNELS = 1
 RATE = 44100
 wave_output_filename = "test.wav"
 
-# create the window for the GUI
+# Code to create the window for the GUI.
 # this class sets up the frame which is the entire window needed to fit the GUI buttons and lable's inside.
 
 class Application(Frame):
     def __init__(self,master):
         Frame.__init__(self,master)
         self.grid(column = 1, row = 5)
-        #self.Style().configure(background = "green")
-        
+               
         self.create_widgets()
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.processor=emotionProcessor.EmotionProcessor(wave_output_filename)
@@ -36,12 +35,12 @@ class Application(Frame):
    
     def create_widgets(self):
        
-        #Start button is added 
+        #Start button is added. 
        
         self.startButton = Button(self, text = " Start: recording          " , justify = "center", command = self.recordAudio, bg = "lightgray",fg ="green")
         self.startButton.grid(row = 0, column = 0)
         
-        # Stop button is added
+        # Stop button is added.
         
         self.stopButton = Button(self, text = " Stop: recording          " , justify = "center", command = self.endAudio, bg ="lightgray",fg = "red")
         self.stopButton.grid(row = 1, column = 0)
@@ -51,22 +50,22 @@ class Application(Frame):
         self.playButton = Button(self, text = "Play Recorded Audio", justify = "center", command = self.playAudio, bg = "lightgray",fg = "green")
         self.playButton.grid(row = 2 , column = 0)
         
-        #Save button is added
+        #Save button is added.
 
         self.saveButton = Button (self, text = "Save Audio                 ", justify = "center", command = self.saveAudio, bg = "lightgray")
         self.saveButton.grid(row = 3, column = 0)
         
-        #button for Delete Audio
+        #Button for Delete Audio.
         
         self.deleteButton = Button (self,text = "Delete Audio              ", justify = "center", command = self.deleteAudio, bg = "lightgray",fg = 'black')
         self.deleteButton.grid(row = 4, column = 0)
         
-        #Button for Process Emotion 
+        #Button for Process Emotion. 
         
         self.processButton = Button(self,text = "Process Emotion       ", justify = "center", command = self.processAudio,bg = "lightgray", fg = "blue")
         self.processButton.grid(row = 5, column = 0)
 
-           # label for the output below "user Id or name".
+        # Label for the output below "user Id or name".
             
         self.label = Label(self, text = "User Name:               ", font = 13, justify = "left",bg ="green2")
         self.label.grid(column = 1, row = 0)
@@ -76,22 +75,23 @@ class Application(Frame):
         self.txt = Entry(self, textvariable = user, width = 32)
         self.txt.grid(column = 1, row = 1)
             
-        # label for the GUI that Says " predicted emotion"        
+        # Label for the GUI that Says " predicted emotion".        
         self.label = Label (self, text = "Predicted Emotion:    ",font = 13, justify = "left",bg = "green2")
         self.label.grid(column = 1, row = 2)
         
-        # output field for the label where the predicted emotion will be added when the NN processed the audio matrics hopefully correctly 
+        # Output field for the label where the predicted emotion will be added when the NN processed the audio matrics hopefully correctly. 
         
         self.text = Entry(self, textvariable = emotionalPrediction, width = 32)
         self.text.grid(column = 1, row = 3)
 
         chk_state = BooleanVar()
-        chk_state.set(True) #set the state of the check button
+        # Set the state of the check button.
+        chk_state.set(True) 
         chk = Checkbutton(self, text='Check To Train Emotion', var=chk_state)
         chk.grid(column = 1, row = 4)
         
         
-        # this is a pop to make sure if the check box for training the emotion (if the predictied emiotion is not correct) this should tell the NN that the classification isn't correct.  
+        # This is a pop to make sure if the check box for training the emotion (if the predictied emiotion is not correct) this should tell the NN that the classification isn't correct.  
         
         if chk_state == True:
             menuBar = Menu(app)
@@ -102,8 +102,8 @@ class Application(Frame):
             menuBar.add_cascade(label = "File", menu=msgMenu)
             app.mainloop()
                    
-# attaching the command of each button to the correct function that needs to fire when a button is pressed.
-#additonal popup is used below for Record Audio button on the GUI above.
+        # attaching the command of each button to the correct function that needs to fire when a button is pressed.
+        #additonal popup is used below for Record Audio button on the GUI above.
 
     def recordAudio(self):
         self.recorder.startAudio()
@@ -116,7 +116,7 @@ class Application(Frame):
         menuBar.add_cascade(label = "File", menu=msgMenu)
         app.mainloop()
         return self
-    #end audio also needs a popup button
+    # End audio also needs a popup button.
     
     def endAudio(self):
         self.recorder.stopAudio()
@@ -130,7 +130,7 @@ class Application(Frame):
         app.mainloop()
         return self
     
-    # calling fuctions for each button on the GUI
+    # Calling fuctions for each button on the GUI.
     def processAudio(self):
         self.processor.pitchProc()
         return self
@@ -143,10 +143,16 @@ class Application(Frame):
 
 
 
-#modify root window
+# Modify root window.
 root = Tk()
 root.title("Audio Control Interface")
-root.geometry ("325x158") # the size of the whole frame
+
+# The size of the whole frame.
+
+root.geometry ("325x158") 
+
+# Background for the whole GUI
+
 root["bg"] = "green2"
 app = Application(root)
 
