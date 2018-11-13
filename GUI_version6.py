@@ -1,4 +1,5 @@
-#Gui interface for Audio Emotional detection program CSC-450 Michael Knapp
+#Gui interface for Audio Emotional detection program CSC-450 Team:1
+#All needed lib are below most need pip install 
 
 from tkinter import *
 import tkinter as tk
@@ -8,6 +9,7 @@ import emotionProcessor
 from tkinter import Menu
 from tkinter import messagebox as mbox
 
+# Hardcoded Variables 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
@@ -28,48 +30,58 @@ class Application(Frame):
         self.processor=emotionProcessor.EmotionProcessor(wave_output_filename)
     
    # class widgets.. this is where the code for each off six buttons two lable's and two text boxes are held.
-   # .pack()= makes the button fit to the entire collumn not just the size of the text inside the button.
+   # Grid not pack is used.
    # grid= where is that button on lable located in the frame.
    # each button has a command atribute that connects the button with a function that controls what the button does.
    
     def create_widgets(self):
+       
+        #Start button is added 
+       
         self.startButton = Button(self, text = " Start: recording          " , justify = "center", command = self.recordAudio, bg = "lightgray",fg ="green")
         self.startButton.grid(row = 0, column = 0)
-
+        
+        # Stop button is added
+        
         self.stopButton = Button(self, text = " Stop: recording          " , justify = "center", command = self.endAudio, bg ="lightgray",fg = "red")
         self.stopButton.grid(row = 1, column = 0)
         
+        #Play Recording button is added.
+        
         self.playButton = Button(self, text = "Play Recorded Audio", justify = "center", command = self.playAudio, bg = "lightgray",fg = "green")
         self.playButton.grid(row = 2 , column = 0)
+        
+        #Save button is added
 
         self.saveButton = Button (self, text = "Save Audio                 ", justify = "center", command = self.saveAudio, bg = "lightgray")
         self.saveButton.grid(row = 3, column = 0)
-
+        
+        #button for Delete Audio
+        
         self.deleteButton = Button (self,text = "Delete Audio              ", justify = "center", command = self.deleteAudio, bg = "lightgray",fg = 'black')
         self.deleteButton.grid(row = 4, column = 0)
-
+        
+        #Button for Process Emotion 
+        
         self.processButton = Button(self,text = "Process Emotion       ", justify = "center", command = self.processAudio,bg = "lightgray", fg = "blue")
         self.processButton.grid(row = 5, column = 0)
 
-
+           # label for the output below "user Id or name".
+            
         self.label = Label(self, text = "User Name:               ", font = 13, justify = "left",bg ="green2")
         self.label.grid(column = 1, row = 0)
-
+    
+        #output for the User id that is either chosen after the emotion is processed or just chosen still an option we are deciding on.
         
         self.txt = Entry(self, textvariable = user, width = 32)
         self.txt.grid(column = 1, row = 1)
-        #not sure who put this in here but I removed them because we shouldn't need more than user at a time. 
-        #this goes for both lable and entry box. 
-        
-        #self.label = Label(self, text = "User Name:")
-        #self.label.grid(column = 2, row = 0)
-
-        #self.text = Entry(self, width = 20)
-        #self.text.grid(column = 3, row = 0)
-        
+            
+        # label for the GUI that Says " predicted emotion"        
         self.label = Label (self, text = "Predicted Emotion:    ",font = 13, justify = "left",bg = "green2")
         self.label.grid(column = 1, row = 2)
-
+        
+        # output field for the label where the predicted emotion will be added when the NN processed the audio matrics hopefully correctly 
+        
         self.text = Entry(self, textvariable = emotionalPrediction, width = 32)
         self.text.grid(column = 1, row = 3)
 
@@ -77,7 +89,10 @@ class Application(Frame):
         chk_state.set(True) #set the state of the check button
         chk = Checkbutton(self, text='Check To Train Emotion', var=chk_state)
         chk.grid(column = 1, row = 4)
-
+        
+        
+        # this is a pop to make sure if the check box for training the emotion (if the predictied emiotion is not correct) this should tell the NN that the classification isn't correct.  
+        
         if chk_state == True:
             menuBar = Menu(app)
             app.config(menu=menuBar)
@@ -86,15 +101,10 @@ class Application(Frame):
             msgMenu.add_command(label= "Close", command =_msgBox)
             menuBar.add_cascade(label = "File", menu=msgMenu)
             app.mainloop()
-            
-        # this is a pop to make sure if the check box for training the emotion (if the predictied emiotion is not correct) this should tell the NN that the classification isn't correct.  
-        
-        
-        
+                   
 # attaching the command of each button to the correct function that needs to fire when a button is pressed.
-#can't test any further until the fuctions self.recorder.startAudio() errors because these are not valid functions yet.
-# added pop window functions for recordAudio fuction adn the endAudio fuction. code that was pasted is at he bottom commented out just in case there are problems testing this that.../n
-#            ....way we can go back and figure what is incorrect.  please leave this for now.
+#additonal popup is used below for Record Audio button on the GUI above.
+
     def recordAudio(self):
         self.recorder.startAudio()
         app = tk.Tk()
@@ -106,6 +116,8 @@ class Application(Frame):
         menuBar.add_cascade(label = "File", menu=msgMenu)
         app.mainloop()
         return self
+    #end audio also needs a popup button
+    
     def endAudio(self):
         self.recorder.stopAudio()
         app = tk.Tk()
@@ -117,6 +129,8 @@ class Application(Frame):
         menuBar.add_cascade(label = "File", menu=msgMenu)
         app.mainloop()
         return self
+    
+    # calling fuctions for each button on the GUI
     def processAudio(self):
         self.processor.pitchProc()
         return self
@@ -126,19 +140,6 @@ class Application(Frame):
         return self
     def deleteAudio(self):
         return self
-# all of this is part of the popwindow code added to endAudio function and the recordAudio buttons (left it here to make sure if we need to add another one you can cut and paste.       
-"""menuBar = Menu(app)
-app.config(menu=menuBar)
-
-#display a Yes or No or Cancel Box
-def _msgBox():
-    mbox.askyesnocancel('Yes or No or Cancel action Box', 'Choose the Action')
-#create the message menu
-msgMenu = Menu(menuBar, tearoff=0)
-msgMenu.add_command(label= "Close", command =_msgBox)
-menuBar.add_cascade(label = "File", menu=msgMenu)
-app.mainloop()"""
-
 
 
 
