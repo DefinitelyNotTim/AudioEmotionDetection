@@ -106,6 +106,7 @@ class Application(Frame):
         #additonal popup is used below for Record Audio button on the GUI above.
 
     def recordAudio(self):
+        self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.recorder.startAudio()
         app = tk.Tk()
         menuBar = Menu(app)
