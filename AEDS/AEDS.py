@@ -81,7 +81,7 @@ class Application(Frame):
     # End audio also needs a popup button.
     
     def endAudio(self):
-        if(isRecording):
+        if(self.isRecording):
             #Stop recording audio
             self.recorder.stopAudio()
 
@@ -129,7 +129,6 @@ class Application(Frame):
 
             #user_profile.writeToProfile(audio_metrics, "nervous")
             return self
-        else
         
     def submit(self):
         self.predicted = self.correction.get()
