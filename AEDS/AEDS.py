@@ -18,6 +18,7 @@ RATE = 44100
 wave_output_filename = "test.wav"
 
 
+
 # Code to create the window for the GUI.
 # this class sets up the frame which is the entire window needed to fit the GUI buttons and lable's inside.
 
@@ -29,6 +30,7 @@ class Application(Frame):
         self.create_widgets()
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.processor=emotionProcessor.EmotionProcessor(wave_output_filename)
+        self.recordingtest = False
 
         
 
@@ -76,12 +78,12 @@ class Application(Frame):
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.recorder.startAudio()
         self.emotionalPrediction.set("Recording...")
-        self.isRecording = True
+        self.recordingtest = True
         return self
     # End audio also needs a popup button.
     
     def endAudio(self):
-        if(self.isRecording):
+        if(self.recordingtest == True):
             #Stop recording audio
             self.recorder.stopAudio()
 
@@ -110,6 +112,7 @@ class Application(Frame):
             question = ("Was predicted emotion " + self.predicted[0] + " correct?")
             if mbox.askyesno("Emotion Prediction Assessment" , question):
                 self.user_profile.addtoProfile(self.audio_metrics, self.predicted[0])
+                self.recordingtest = False
             else:
                 newtab = Tk()
                 newtab.title("Wrong Emotion Correction")
@@ -126,13 +129,15 @@ class Application(Frame):
                 submitButton.grid(row = 1, column = 0)
 
                 newtab.mainloop()
+        else:
+            mbox.showerror("Incorrect button press!", "You must be recording to stop. Please start/restart recording.")
 
-            #user_profile.writeToProfile(audio_metrics, "nervous")
-            return self
+        return self
         
     def submit(self):
         self.predicted = self.correction.get()
         self.user_profile.addtoProfile(self.audio_metrics, self.predicted)
+        self.recordingtest = False
 # Modify root window.
 root = Tk()
 root.title("Audio Control Interface")
@@ -147,4 +152,6 @@ app = Application(root)
 
 #kick off the event loop
 root.mainloop()
+
+
 
