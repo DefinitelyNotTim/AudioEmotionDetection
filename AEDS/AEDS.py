@@ -76,64 +76,61 @@ class Application(Frame):
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.recorder.startAudio()
         self.emotionalPrediction.set("Recording...")
+        self.isRecording = True
         return self
     # End audio also needs a popup button.
     
     def endAudio(self):
-        #Stop recording audio
-        self.recorder.stopAudio()
-        
-        #Set the box containing the emotional prediction to be blank
-        self.emotionalPrediction.set("Done Recording.")
-        
-        #Get the entered user name from the entry box
-        self.userName = self.user.get()
-        
-        #print("USER NAME: " + self.userName)   #Debugging print
-        
-        # Call the method to get the audio metrics
-        self.audio_metrics = self.processor.collectMetrics()
-        
-        # Create a user profile object using the entered user name
-        self.user_profile = profileManager(self.userName)
-        
-        # Access the profile for the given user
-        self.user_profile.accessProfile()
-        
-        #predicted = scikit_network.compare_new(audio_metrics)
-        self.predicted = scikit_network.compare_new(self.audio_metrics, self.user_profile)
-        self.emotionalPrediction.set(self.predicted[0])
+        if(isRecording):
+            #Stop recording audio
+            self.recorder.stopAudio()
 
-        #yes no box asking if returned emotion was correct
-        question = ("Was predicted emotion " + self.predicted[0] + " correct?")
-        if mbox.askyesno("Emotion Prediction Assessment" , question):
-            self.user_profile.addtoProfile(self.audio_metrics, self.predicted[0])
-        else:
-            newtab = Tk()
-            newtab.title("Wrong Emotion Correction")
-            newtab.geometry("300x158")
+            #Set the box containing the emotional prediction to be blank
+            self.emotionalPrediction.set("Done Recording.")
 
-            
-            self.correction = StringVar(newtab)
-            self.correction.set("Normal")
+            #Get the entered user name from the entry box
+            self.userName = self.user.get()
 
-            emotions = OptionMenu(newtab, self.correction, "Normal", "Excited", "Angry", "Nervous")
-            emotions.grid(row = 0, column = 0)
+            #print("USER NAME: " + self.userName)   #Debugging print
 
-            submitButton = Button(newtab, text = "Submit Emotion" , justify = "center", command = lambda:[self.submit(), newtab.destroy()], bg = "lightgray")
-            submitButton.grid(row = 1, column = 0)
+            # Call the method to get the audio metrics
+            self.audio_metrics = self.processor.collectMetrics()
 
-            
-            
-            newtab.mainloop()
-            
-            
+            # Create a user profile object using the entered user name
+            self.user_profile = profileManager(self.userName)
 
-            
-            
+            # Access the profile for the given user
+            self.user_profile.accessProfile()
+
+            #predicted = scikit_network.compare_new(audio_metrics)
+            self.predicted = scikit_network.compare_new(self.audio_metrics, self.user_profile)
+            self.emotionalPrediction.set(self.predicted[0])
+
+            #yes no box asking if returned emotion was correct
+            question = ("Was predicted emotion " + self.predicted[0] + " correct?")
+            if mbox.askyesno("Emotion Prediction Assessment" , question):
+                self.user_profile.addtoProfile(self.audio_metrics, self.predicted[0])
+            else:
+                newtab = Tk()
+                newtab.title("Wrong Emotion Correction")
+                newtab.geometry("300x158")
+
+
+                self.correction = StringVar(newtab)
+                self.correction.set("Normal")
+
+                emotions = OptionMenu(newtab, self.correction, "Normal", "Excited", "Angry", "Nervous")
+                emotions.grid(row = 0, column = 0)
+
+                submitButton = Button(newtab, text = "Submit Emotion" , justify = "center", command = lambda:[self.submit(), newtab.destroy()], bg = "lightgray")
+                submitButton.grid(row = 1, column = 0)
+
+                newtab.mainloop()
+
+            #user_profile.writeToProfile(audio_metrics, "nervous")
+            return self
+        else
         
-        #user_profile.writeToProfile(audio_metrics, "nervous")
-        return self
     def submit(self):
         self.predicted = self.correction.get()
         self.user_profile.addtoProfile(self.audio_metrics, self.predicted)
