@@ -1,3 +1,17 @@
+## emotionProcessor.py
+##	This class allows the software to extract vocal metrics
+##		from a given audio file using various methods.
+##	Libraries used to extract audio metrics include:
+##		-pyAudioAnalysis
+##		-scipy.io
+##		-python_speech_features		
+##		-pydub
+##	Each method of the Emotion Processor class works
+##		with a different library to extract a specific
+##		audio metric. Each of these methods conatin
+##		documentation relating tothe author and how they work.
+
+# Import libraries	
 from pyAudioAnalysis import audioBasicIO
 from pyAudioAnalysis import audioFeatureExtraction
 from scipy.io import wavfile
@@ -15,34 +29,41 @@ from statistics import *
 import numpy as np
 
 
+## Declaration of the EmotionProcessor class
 class EmotionProcessor(object):
+
+## Initialization method used to create a new object of
+##	the EmotionProcessor class.
     def __init__(self, fname):
         self.fname= fname
-        
+    
+## Enter and exit methods used by the EmotionProcessor class.
     def __enter__(self):
         return self
     
     def __exit__(self, exception, value, traceback):
         self.close()
 
-#mfccProc: extracts the MFCCs from given audio
-# Written by Timmothy Lane
-# Creates 2d arrays for storage of the fbank feature, mfcc features
-#   and the delta of MFCC features
-# Written By: Timmothy Lane
+##mfccProc: extracts the MFCCs from given audio
+## Written by Timmothy Lane
+## Creates 2d arrays for storage of the fbank feature, mfcc features
+##   and the delta of MFCC features
+## NOTE: code used to create 2 dimensional arrays for both the delta
+##	of MFCCs and log of the filterbank features are included, but commented
+##	out. These statements were included for use by future researchers who
+##	may want to experiment with the different metrics to improce accuracy.
+## Inputs: self
+## Output: an array containing the Mel-Frequency Cepstrum Coefficients
+## Written By: Timmothy Lane
     def mfccProc(self):
         (rate,sig) = audioBasicIO.readAudioFile(self.fname)
         #Create 2d array for MFCC features
         mfcc_feat = mfcc(sig,samplerate = 44100, nfft = 1103)
         #Create 2d array for the delta of MFCC features
-        d_mfcc_feat = delta(mfcc_feat, 2)
+        #d_mfcc_feat = delta(mfcc_feat, 2)
         #Create 2d array for the log of fbank features
-        fbank_feat = logfbank(sig,rate)        
-##  print statements for debug process
-##        print("MFCC (tone) Metrics:")
-##        print(fbank_feat[0])
-##        print(mfcc_feat[0])
-##        print(d_mfcc_feat[0])
+        #fbank_feat = logfbank(sig,rate)        
+		#Return the Mel-Frequency Cepstrum Coefficients
         return(mfcc_feat)
     
         
@@ -85,7 +106,7 @@ class EmotionProcessor(object):
             # must be silent for at least 100ms
             min_silence_len=1,
             # consider it silent if quieter than -16 dBFS
-            silence_thresh=5)
+            silence_thresh=8)
 
         # List made to store all of the silence .wav chunks
         waveAry = []
@@ -121,7 +142,6 @@ class EmotionProcessor(object):
 ##  for use by the software
 ##  Written by: Bryan Jones
     def collectMetrics(self):
-        #print("Collecting Metrics")
         pitch = self.pitchProc()
         pitch = stdev(pitch)
         

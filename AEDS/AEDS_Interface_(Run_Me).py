@@ -9,13 +9,15 @@ import scikit_network
 from statistics import stdev
 import numpy as np
 from profileManager import *
+from os import *
 
 # Hardcoded Variables 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
-wave_output_filename = "test.wav"
+wave_output_filename = "user_recording.wav"
+
 
 
 # Code to create the window for the GUI.
@@ -29,6 +31,7 @@ class Application(Frame):
         self.create_widgets()
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.processor=emotionProcessor.EmotionProcessor(wave_output_filename)
+        self.recordingtest = False
 
         
 
@@ -76,64 +79,69 @@ class Application(Frame):
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.recorder.startAudio()
         self.emotionalPrediction.set("Recording...")
+        self.recordingtest = True
         return self
     # End audio also needs a popup button.
     
     def endAudio(self):
-        #Stop recording audio
-        self.recorder.stopAudio()
-        
-        #Set the box containing the emotional prediction to be blank
-        self.emotionalPrediction.set("Done Recording.")
-        
-        #Get the entered user name from the entry box
-        self.userName = self.user.get()
-        
-        #print("USER NAME: " + self.userName)   #Debugging print
-        
-        # Call the method to get the audio metrics
-        self.audio_metrics = self.processor.collectMetrics()
-        
-        # Create a user profile object using the entered user name
-        self.user_profile = profileManager(self.userName)
-        
-        # Access the profile for the given user
-        self.user_profile.accessProfile()
-        
-        #predicted = scikit_network.compare_new(audio_metrics)
-        self.predicted = scikit_network.compare_new(self.audio_metrics, self.user_profile)
-        self.emotionalPrediction.set(self.predicted[0])
+        if(self.recordingtest == True):
+            #Stop recording audio
+            self.recorder.stopAudio()
 
-        #yes no box asking if returned emotion was correct
-        question = ("Was predicted emotion " + self.predicted[0] + " correct?")
-        if mbox.askyesno("Emotion Prediction Assessment" , question):
-            self.user_profile.addtoProfile(self.audio_metrics, self.predicted[0])
+            #Set the box containing the emotional prediction to be blank
+            self.emotionalPrediction.set("Done Recording.")
+
+            #Get the entered user name from the entry box
+            self.userName = self.user.get()
+
+            #print("USER NAME: " + self.userName)   #Debugging print
+
+            # Call the method to get the audio metrics
+            self.audio_metrics = self.processor.collectMetrics()
+
+            # Create a user profile object using the entered user name
+            self.user_profile = profileManager(self.userName)
+
+            # Access the profile for the given user
+            self.user_profile.accessProfile()
+
+            #predicted = scikit_network.compare_new(audio_metrics)
+            self.predicted = scikit_network.compare_new(self.audio_metrics, self.user_profile)
+            self.emotionalPrediction.set(self.predicted[0])
+
+            #Delete the recorded audio file
+            os.remove("user_recording.wav")
+
+            #yes no box asking if returned emotion was correct
+            question = ("Was predicted emotion " + self.predicted[0] + " correct?")
+            if mbox.askyesno("Emotion Prediction Assessment" , question):
+                self.user_profile.addtoProfile(self.audio_metrics, self.predicted[0])
+                self.recordingtest = False
+            else:
+                newtab = Tk()
+                newtab.title("Wrong Emotion Correction")
+                newtab.geometry("300x158")
+
+
+                self.correction = StringVar(newtab)
+                self.correction.set("Normal")
+
+                emotions = OptionMenu(newtab, self.correction, "Normal", "Excited", "Angry", "Nervous")
+                emotions.grid(row = 0, column = 0)
+
+                submitButton = Button(newtab, text = "Submit Emotion" , justify = "center", command = lambda:[self.submit(), newtab.destroy()], bg = "lightgray")
+                submitButton.grid(row = 1, column = 0)
+
+                newtab.mainloop()
         else:
-            newtab = Tk()
-            newtab.title("Wrong Emotion Correction")
-            newtab.geometry("300x158")
-            
-            self.correction = StringVar(newtab)
-            self.correction.set("Normal")
-
-            submitButton = Button(newtab, text = "Submit Emotion" , justify = "center", command = self.submit, bg = "lightgray")
-            submitButton.grid(row = 1, column = 0)
-
-            emotions = OptionMenu(newtab, self.correction, "Normal", "Excited", "Angry", "Nervous")
-            emotions.grid(row = 0, column = 0)
-            
-            newtab.mainloop()
-            
-            
-
-            
-            
-        
-        #user_profile.writeToProfile(audio_metrics, "nervous")
+            mbox.showerror("Incorrect button press!", "You must be recording to stop. Please start/restart recording.")
         return self
+        
     def submit(self):
-        self.predicted
-        self.user_profile.addtoProfile(self.audio_metrics, self.predicted[0])
+        self.predicted = self.correction.get()
+        self.user_profile.addtoProfile(self.audio_metrics, self.predicted)
+        self.recordingtest = False
+		
 # Modify root window.
 root = Tk()
 root.title("Audio Control Interface")
@@ -148,4 +156,6 @@ app = Application(root)
 
 #kick off the event loop
 root.mainloop()
+
+
 
