@@ -43,7 +43,6 @@ class profileManager:
     def accessProfile(self):
         # Use the path attribute to create a Path for the file
         self.file = Path(self.path)
-        #print(self.file)       #print statement for debugging
         # If the file associated with the user  profile exists
         if self.file.exists():
             # Create a dataframe holding the information of the user profile using pandas
@@ -64,13 +63,11 @@ class profileManager:
 ##      with the new metrics
     def writeToProfile(self, newMetrics, emotion):
         self.accessProfile()
-        #print(self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion])
         self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion, "Pitch"] = newMetrics[0]
         self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion, "Tone"] = newMetrics[1]
         self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion, "SPL"] = newMetrics[2]
         self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion, "wordGap"] = newMetrics[3]
         self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion, "WordGapLen"] = newMetrics[4]
-        #print(self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion])
         self.oldMetrics.to_csv(self.path, index = False, header = 0)
         return self.path
 
@@ -84,6 +81,10 @@ class profileManager:
         #   current user profile
         generic.to_csv(self.path, index = False, header = 0)
         return self.path
+		
+##	Method that allows for data to be appended to a user profile while not overwriting
+##		previous data
+##	Written By: Bryan Jones
     def addtoProfile(self, newMetric, emotion):
         with open(self.path, 'a') as f:
             fields = [newMetric[0], newMetric[1],newMetric[2],newMetric[3],newMetric[4], emotion]

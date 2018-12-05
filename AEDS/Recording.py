@@ -1,7 +1,7 @@
 import pyaudio
 import wave
 
-wave_output_filename = "test.wav"
+wave_output_filename = "user_recording.wav"
 
 class Recording(object):
     def __init__(self, fname, channels, rate, CHUNK):
