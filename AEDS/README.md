@@ -18,7 +18,7 @@ Authors: Humberto Colin, Bryan Jones, Michael Knapp, Timmothy Lane, Alex Shanon,
     
     -pyAudioAnalysis
       -More information on this library and installation can be found at:
-      https://github.com/tyiannak/pyAudioAnalysis
+      <https://github.com/tyiannak/pyAudioAnalysis>
       
      -pyaudio
       -More information on this library and installation can be found at:
