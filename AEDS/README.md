@@ -2,7 +2,7 @@
 Real-time human emotion detection and analysis through voice and speech pattern processing
 Authors: Humberto Colin, Bryan Jones, Michael Knapp, Timmothy Lane, Alex Shanon, and Mark Webb
 
-Instructions To Run:
+## Instructions To Run:
 -To run the Audio Emotion Detection (AEDS) software, you will need to have python version 3.6.6 or Python 3.6.7 installed on your
  computer. This software will not work with python 3.7 due to library dependencies. These versions of Python can be found at:
  https://www.python.org/downloads/
@@ -15,13 +15,14 @@ Instructions To Run:
   https://packaging.python.org/tutorials/installing-packages/
   
   -The packages that must be installed to run the AEDS software include:
-    -pyaudio
-      -More information on this library and installation can be found at:
-      https://people.csail.mit.edu/hubert/pyaudio/
     
     -pyAudioAnalysis
       -More information on this library and installation can be found at:
       https://github.com/tyiannak/pyAudioAnalysis
+      
+     -pyaudio
+      -More information on this library and installation can be found at:
+      https://people.csail.mit.edu/hubert/pyaudio/
     
     -numpy
       -More information on this library and installation can be found at:
@@ -32,20 +33,20 @@ Instructions To Run:
       -More information on this library and installation can be found at:
       https://github.com/jiaaro/pydub
    
-   -pandas
+    -pandas
       -More information on this library and installation can be found at:
       https://pandas.pydata.org/
    
-   -scikit-learn
+    -scikit-learn
       -NOTE: To install sklearn, -U must be used in the command line argument. ie: "pip install -U scikit-learn"
       -More information on this library and installation can be found at:
       https://scikit-learn.org/stable/install.html
    
-   -python_speech_features
+    -python_speech_features
       -More information on this library and installation can be found at:
       https://github.com/jameslyons/python_speech_features
    
-   -libmagic
+    -libmagic
       -libmagic version 0.4.14 must be installed. This can be done with the command line argument:
       "python -m pip install python-magic-bin==0.4.1.4"
       
