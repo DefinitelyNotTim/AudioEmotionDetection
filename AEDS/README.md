@@ -1,6 +1,7 @@
 # AudioEmotionDetection
 Real-time human emotion detection and analysis through voice and speech pattern processing
-Authors: Humberto Colin, Bryan Jones, Michael Knapp, Timmothy Lane, Alex Shanon, and Mark Webb
+## Authors: 
+Humberto Colin, Bryan Jones, Michael Knapp, Timmothy Lane, Alex Shanon, and Mark Webb
 
 ## Instructions To Run:
 -To run the Audio Emotion Detection (AEDS) software, you will need to have python version 3.6.6 or Python 3.6.7 installed on your
