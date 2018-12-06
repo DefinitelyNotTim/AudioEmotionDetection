@@ -1,17 +1,18 @@
 # AudioEmotionDetection
-Real-time human emotion detection and analysis through voice and speech pattern processing
+Real-time human emotion detection and analysis through voice and speech pattern processing.
 ## Authors: 
 Humberto Colin, Bryan Jones, Michael Knapp, Timmothy Lane, Alex Shanon, and Mark Webb
 
 ## Instructions To Run:
--To run the Audio Emotion Detection (AEDS) software, you will need to have python version 3.6.6 or Python 3.6.7 installed on your
- computer. This software will not work with python 3.7 due to library dependencies. These versions of Python can be found at:
+-To run the Audio Emotion Detection (AEDS) software, you will need to have python version 3.6.6 or Python 3.6.7 installed on
+your computer. This software will not work with python 3.7 due to library dependencies. These versions of Python can be found at:
  https://www.python.org/downloads/
  
  -Once the correct version of Python is installed on your computer, you will need to install multiple python packages that the
   software depends on. You can install these packages using different methods. The easiest method to install these packages
   would be using Python's built in package manager, PIP. PIP installs can be performed through the command line argument:
   "python -m pip install <package name>"
+ 
   More details about installing python packages can be found at:
   https://packaging.python.org/tutorials/installing-packages/
   
