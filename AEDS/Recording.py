@@ -1,6 +1,9 @@
 import pyaudio
 import wave
-
+'''
+The recording class was originally written by Humberto and heavily edited by Alex to allow for variable recording time, easily processed formatting,
+and stopping the recording on demand
+'''
 wave_output_filename = "user_recording.wav"
 
 class Recording(object):
@@ -20,8 +23,6 @@ class Recording(object):
         self.close()
         
     def startAudio(self):
-        
-
         self._stream = self._p.open(format=pyaudio.paInt16,channels= self.channels,rate=self.rate,input=True,frames_per_buffer=self.CHUNK, stream_callback=self.get_callback())
         print("recording...")
 
