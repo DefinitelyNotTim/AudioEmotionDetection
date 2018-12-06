@@ -1,3 +1,14 @@
+"""
+AEDS User Interface: This software allows the user to interact with the Audio Emotion Detection (AEDS)
+	software through a GUI.
+	This interface contains two text fields and two buttons.
+	For information on how to properly use this  interface, please see the README file included with
+	this document.
+Authors: Base code written by Michael Knapp. Edits made by Humberto Colin, Bryan Jones, Timmothy Lane, Alex Shannon,
+	and Mark Webb.
+"""
+
+
 from tkinter import *
 import tkinter as tk
 import pyaudio
