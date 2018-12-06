@@ -53,3 +53,31 @@ Humberto Colin, Bryan Jones, Michael Knapp, Timmothy Lane, Alex Shanon, and Mark
       
     NOTE: For certain packages above the installation process in the corresponding links must be used instead of standard
     PIP installations.
+    
+  -Once the above packages are installed, the AEDS software can be executed on the host machine
+  -To run the AEDS software, simply execute the Python file labeled "AEDS_Interface_(Run_Me).py"
+    -This file can be executed in numerous ways, depending on the host machine. The easiest methods include:
+      -Using a command line argument (ie. "pyhon AEDS_Interface_(Run_Me).py").
+      -Running the file through the IDLE Python interpreter.
+      -Double clicking the file (only works if proper path associations are set on the host machine).
+      
+## Using the software
+Once the software is running on your machine, a simple graphical user interface should be displayed. This interface only
+contains two texts fields and two buttons.
+
+ -User Name: This text field allows the user to enter in a their desired username. If no username is entered, the user will
+  have their data stored in and compared against a generic file containing data from all nameless users. If the user does enter
+  a username, a new user profile will be created for them, allowing the software to specify its prediction to data relating
+  specifically to the user.
+  
+ -Predicted Emotion: This text field is used by the software to notify the user of its prediction and is not intended to be
+  altered by the user.
+  
+ -Start Recording: This button will begin the process of capturing audio from the user's connected microphone. If the user
+  wishes to enter a username, they must do so BEFORE hitting this button.
+  
+ -Stop Recording: This button prompts the software to stop recording, analyze the audio, compare it against previous audio
+  recordings, and display the predicted emotion to the user. After hitting this button, a pop-up will be displayed to the user
+  allowing them to indicate if the predicted emotion was correct. If the predicted emotion was correct, hit the yes button. If
+  the predicted emotion was not correct, hit the no button and a drop-down menu will be displayed, allowing the user to select
+  the correct emotion.
