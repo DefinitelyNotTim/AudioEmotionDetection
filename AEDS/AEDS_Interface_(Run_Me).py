@@ -74,7 +74,7 @@ class Application(Frame):
         self.text.grid(column = 1, row = 3)
 
         
-        
+        #this function was written by Alex
     def recordAudio(self):
         self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
         self.recorder.startAudio()
