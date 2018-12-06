@@ -1,15 +1,17 @@
-## emotionProcessor.py
-##	This class allows the software to extract vocal metrics
-##		from a given audio file using various methods.
-##	Libraries used to extract audio metrics include:
-##		-pyAudioAnalysis
-##		-scipy.io
-##		-python_speech_features		
-##		-pydub
-##	Each method of the Emotion Processor class works
-##		with a different library to extract a specific
-##		audio metric. Each of these methods conatin
-##		documentation relating tothe author and how they work.
+""" 
+emotionProcessor.py
+	This class allows the software to extract vocal metrics
+		from a given audio file using various methods.
+	Libraries used to extract audio metrics include:
+		-pyAudioAnalysis
+		-scipy.io
+		-python_speech_features		
+		-pydub
+	Each method of the Emotion Processor class works
+		with a different library to extract a specific
+		audio metric. Each of these methods conatin
+		documentation relating tothe author and how they work.
+"""
 
 # Import libraries	
 from pyAudioAnalysis import audioBasicIO
@@ -44,17 +46,19 @@ class EmotionProcessor(object):
     def __exit__(self, exception, value, traceback):
         self.close()
 
-##mfccProc: extracts the MFCCs from given audio
-## Written by Timmothy Lane
-## Creates 2d arrays for storage of the fbank feature, mfcc features
-##   and the delta of MFCC features
-## NOTE: code used to create 2 dimensional arrays for both the delta
-##	of MFCCs and log of the filterbank features are included, but commented
-##	out. These statements were included for use by future researchers who
-##	may want to experiment with the different metrics to improce accuracy.
-## Inputs: self
-## Output: an array containing the Mel-Frequency Cepstrum Coefficients
-## Written By: Timmothy Lane
+"""
+   mfccProc: extracts the MFCCs from given audio
+   Written by Timmothy Lane
+   Creates 2d arrays for storage of the fbank feature, mfcc features
+   and the delta of MFCC features
+   NOTE: code used to create 2 dimensional arrays for both the delta
+	of MFCCs and log of the filterbank features are included, but commented
+	out. These statements were included for use by future researchers who
+	may want to experiment with the different metrics to improce accuracy.
+  Inputs: self
+ Output: an array containing the Mel-Frequency Cepstrum Coefficients
+ Author: Timmothy Lane
+"""
     def mfccProc(self):
         (rate,sig) = audioBasicIO.readAudioFile(self.fname)
         #Create 2d array for MFCC features
@@ -71,13 +75,21 @@ class EmotionProcessor(object):
         [Fs,x] = audioBasicIO.readAudioFile(self.fname)
         info=audioFeatureExtraction.stFeatureExtraction(x, Fs, 0.050*Fs, 0.025*Fs)
         return info[0][1]
+"""
+  Description: This function exctracts the metrics from the audio file that partain to the volume
+               or Sound Pressure Level(SPL)
+  Inputs:self
+  Outputs: returns a numpy array called freqArray of the volume metrics from the audio file
+  Author: Humberto Colin
+
+"""
 		
     def volumeProc(self):
         freq, snd = wavfile.read(self.fname)
         snd = snd/(2.**15)
         s1 = snd[:]
         n = len(s1)
-        p = fft(s1) #take the fourier transform
+        p = fft(s1) #takes the fourier transform
         unique = int(math.ceil((n+1)/2.0))
         p = p[0:unique]
         p=abs(p)
@@ -87,18 +99,20 @@ class EmotionProcessor(object):
             p[1:len(p)]=p[1:len(p)]*2
         else:
             p[1:len(p)-1]=p[1:len(p)-1]*2
-        freqArray = numpy.arange(0,unique,1.0)*(freq/n)
+        freqArray = numpy.arange(0,unique,1.0)*(freq/n)#stores the values from the start to finish of the audio file
         #numpy.set_printoptions(threshold = numpy.nan)
         #rms_val = sqrt(mean(s1**2))
         return(freqArray)
 
 
-    
-## gapProc: function that allows the extraction of the gaps between
-## consecutive words.
-## Inputs: self
-## Output: an array containing the lengths of every gap between words
-## Written By: Michael Knapp and Timmothy Lane
+"""    
+  gapProc: function that allows the extraction of the gaps between
+  consecutive words.
+  Inputs: self
+  Output: an array containing the lengths of every gap between words
+  Author: Michael Knapp and Timmothy Lane
+
+"""
     def gapProc(self):
     #def gapProc(self , lowest):
         sound_file = AudioSegment.from_wav(self.fname)
@@ -136,11 +150,14 @@ class EmotionProcessor(object):
         return(chunkLengthArray)
 
 
-##  collectMetrics:
-##  Collects the audio metrics using the above methods,
-##  places them into a pandas array, and returns them
-##  for use by the software
-##  Written by: Bryan Jones
+"""
+  collectMetrics:
+  Collects the audio metrics using the above methods,
+  places them into a pandas array, and returns them
+  for use by the software
+  Author: Bryan Jones
+"""
+
     def collectMetrics(self):
         pitch = self.pitchProc()
         pitch = stdev(pitch)
