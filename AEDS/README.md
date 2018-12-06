@@ -65,7 +65,7 @@ Humberto Colin, Bryan Jones, Michael Knapp, Timmothy Lane, Alex Shanon, and Mark
 Once the software is running on your machine, a simple graphical user interface should be displayed. This interface only
 contains two texts fields and two buttons.
 
-    -User Name: This text field allows the user to enter in a their desired username. If no username is entered, the user will
+    **-User Name:** This text field allows the user to enter in a their desired username. If no username is entered, the user will
      have their data stored in and compared against a generic file containing data from all nameless users. If the user does
      enter a username, a new user profile will be created for them, allowing the software to specify its prediction to data
      relating specifically to the user.
