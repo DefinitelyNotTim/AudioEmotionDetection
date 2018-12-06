@@ -58,6 +58,7 @@ your computer. This software will not work with python 3.7 due to library depend
   -Once the above packages are installed, the AEDS software can be executed on the host machine
   -To run the AEDS software, simply execute the Python file labeled "AEDS_Interface_(Run_Me).py"
     -This file can be executed in numerous ways, depending on the host machine. The easiest methods include:
+    
       -Using a command line argument (ie. "pyhon AEDS_Interface_(Run_Me).py").
       -Running the file through the IDLE Python interpreter.
       -Double clicking the file (only works if proper path associations are set on the host machine).
