@@ -6,6 +6,7 @@ AEDS User Interface: This software allows the user to interact with the Audio Em
 	this document.
 Authors: Base code written by Michael Knapp. Edits made by Humberto Colin, Bryan Jones, Timmothy Lane, Alex Shannon,
 	and Mark Webb.
+Related Software Requirements: FR.7, FR.8, FR.10, FR.11, EIR.1, EIR.2, EIR.3, EIR.4, EIR.5
 """
 
 
@@ -54,23 +55,23 @@ class Application(Frame):
    
     def create_widgets(self):
        
-        #Start button is added. 
-       
+        #Start button, which begins the recording process.
+	#Related Software Requirements: EIR.1, EIR.2
         self.startButton = Button(self, text = " Start: recording          " , justify = "center", command = self.recordAudio, bg = "lightgray")
         self.startButton.grid(row = 0, column = 0)
         
-        # Stop button is added.
-        
+        # Stop button, which ends the recording process and begins the process of metric extraction/comparison.
+	# Related Software Requirements: EIR.4
         self.stopButton = Button(self, text = " Stop: recording          " , justify = "center", command = self.endAudio, bg ="lightgray")
         self.stopButton.grid(row = 1, column = 0)
         
         
         # Label for the output below "user Id or name".
-            
+        # Related Software Requirements: FR.7, FR.8
         self.label = Label(self, text = "User Name:               ", font = 13, justify = "left")
         self.label.grid(column = 1, row = 0)
     
-        #output for the User id that is either chosen after the emotion is processed or just chosen still an option we are deciding on.
+        #output for the User id
         self.user = StringVar()
         self.txt = Entry(self, textvariable = self.user, width = 32)
         self.txt.grid(column = 1, row = 1)
@@ -80,7 +81,8 @@ class Application(Frame):
         self.label.grid(column = 1, row = 2)
         
         # Output field for the label where the predicted emotion will be added when the NN processed the audio matrics hopefully correctly. 
-        self.emotionalPrediction = StringVar()
+        # Related Softare Requirements: FR.10, EIR.5
+	self.emotionalPrediction = StringVar()
         self.text = Entry(self, textvariable = self.emotionalPrediction, width = 32)
         self.text.grid(column = 1, row = 3)
 
@@ -92,7 +94,6 @@ class Application(Frame):
         self.emotionalPrediction.set("Recording...")
         self.recordingtest = True
         return self
-    # End audio also needs a popup button.
     
     def endAudio(self):
         if(self.recordingtest == True):
