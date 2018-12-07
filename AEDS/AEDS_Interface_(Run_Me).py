@@ -80,9 +80,9 @@ class Application(Frame):
         self.label = Label (self, text = "Predicted Emotion:    ",font = 13, justify = "left")
         self.label.grid(column = 1, row = 2)
         
-        # Output field for the label where the predicted emotion will be added when the NN processed the audio matrics hopefully correctly. 
+        # Output field for the label where the predicted emotion will be added when the kNN processed the audio matrics hopefully correctly. 
         # Related Softare Requirements: FR.10, EIR.5
-	self.emotionalPrediction = StringVar()
+        self.emotionalPrediction = StringVar()
         self.text = Entry(self, textvariable = self.emotionalPrediction, width = 32)
         self.text.grid(column = 1, row = 3)
 
@@ -94,6 +94,7 @@ class Application(Frame):
         self.emotionalPrediction.set("Recording...")
         self.recordingtest = True
         return self
+    # End audio also needs a popup button.
     
     def endAudio(self):
         if(self.recordingtest == True):
@@ -106,8 +107,6 @@ class Application(Frame):
             #Get the entered user name from the entry box
             self.userName = self.user.get()
 
-            #print("USER NAME: " + self.userName)   #Debugging print
-
             # Call the method to get the audio metrics
             self.audio_metrics = self.processor.collectMetrics()
 
@@ -117,7 +116,7 @@ class Application(Frame):
             # Access the profile for the given user
             self.user_profile.accessProfile()
 
-            #predicted = scikit_network.compare_new(audio_metrics)
+            #Get the prediction from the scikit network
             self.predicted = scikit_network.compare_new(self.audio_metrics, self.user_profile)
             self.emotionalPrediction.set(self.predicted[0])
 
