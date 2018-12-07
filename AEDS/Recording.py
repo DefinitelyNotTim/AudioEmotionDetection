@@ -3,7 +3,7 @@ import wave
 '''
 The recording class was originally written by Humberto and heavily edited by Alex to allow for variable recording time, easily processed formatting,
 and stopping the recording on demand.
-Related Software Requirements: FR.1
+Related Software Requirements: FR.1, HI.1, CI.1
 '''
 wave_output_filename = "user_recording.wav"
 
