@@ -50,7 +50,7 @@ your computer. This software will not work with python 3.7 due to library depend
    
     -libmagic
       -libmagic version 0.4.14 must be installed. This can be done with the command line argument:
-      "python -m pip install python-magic-bin==0.4.1.4"
+      "python -m pip install python-magic-bin==0.4.14"
       
     NOTE: For certain packages above the installation process in the corresponding links must be used instead of standard
     PIP installations.
