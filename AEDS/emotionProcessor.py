@@ -10,6 +10,7 @@
 ##		with a different library to extract a specific
 ##		audio metric. Each of these methods conatin
 ##		documentation relating tothe author and how they work.
+##      Related Software Requirements: FR.3, FR.4, FR.5, FR.6
 
 
 # Import libraries	
@@ -48,15 +49,16 @@ class EmotionProcessor(object):
 
 ##   mfccProc: extracts the MFCCs from given audio
 ##   Written by Timmothy Lane
-#   Creates 2d arrays for storage of the fbank feature, mfcc features
+##   Creates 2d arrays for storage of the fbank feature, mfcc features
 ##   and the delta of MFCC features
 ##   NOTE: code used to create 2 dimensional arrays for both the delta
 ##	of MFCCs and log of the filterbank features are included, but commented
 ##	out. These statements were included for use by future researchers who
 ##	may want to experiment with the different metrics to improce accuracy.
 ##  Inputs: self
-## Output: an array containing the Mel-Frequency Cepstrum Coefficients
-## Author: Timmothy Lane
+##  Output: an array containing the Mel-Frequency Cepstrum Coefficients
+##  Related Software Requirements: FR.6
+##  Author: Timmothy Lane
 
     def mfccProc(self):
         (rate,sig) = audioBasicIO.readAudioFile(self.fname)
@@ -73,6 +75,7 @@ class EmotionProcessor(object):
 ## Description: This function extracts the pitch of the audio file and puts it into a list of short term measurements from the file
 ## Inputs:self
 ## Outputs: array of the pitches for the short term chunks
+##  Related Software Requirements: FR.3
 ##Author: Alex Shannon
     def pitchProc(self):
         [Fs,x] = audioBasicIO.readAudioFile(self.fname)
@@ -83,6 +86,7 @@ class EmotionProcessor(object):
 ##               or Sound Pressure Level(SPL)
 ##  Inputs:self
 ##  Outputs: returns a numpy array called freqArray of the volume metrics from the audio file
+##  Related Software Requirements: FR.4
 ##  Author: Humberto Colin
 		
     def volumeProc(self):
@@ -111,6 +115,7 @@ class EmotionProcessor(object):
 ##  consecutive words.
 ##  Inputs: self
 ##  Output: an array containing the lengths of every gap between words
+##  Related Software Requirements: FR.5
 ##  Author: Michael Knapp and Timmothy Lane
 
     def gapProc(self):
