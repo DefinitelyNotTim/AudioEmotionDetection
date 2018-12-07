@@ -17,7 +17,7 @@ from profileManager import *
 ##          and the user profile.
 ## Outputs: The predicted emotional state of the user.
 ## Authors: Bryan Jones and Mark Webb
-## Related Software Requirements:
+## Related Software Requirements: FR.8, FR.9
 def compare_new(new_metrics, user_profile):
     # Changed the emotion data to use user profile data
     # Tim - 11/24
