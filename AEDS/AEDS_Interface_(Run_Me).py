@@ -89,10 +89,13 @@ class Application(Frame):
         
         #this function was written by Alex
     def recordAudio(self):
-        self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
-        self.recorder.startAudio()
-        self.emotionalPrediction.set("Recording...")
-        self.recordingtest = True
+	if(self.recordingtest == True):
+		print("Already Recording!")
+	else:
+		self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE, CHUNK)
+		self.recorder.startAudio()
+		self.emotionalPrediction.set("Recording...")
+		self.recordingtest = True
         return self
     # End audio also needs a popup button.
     
