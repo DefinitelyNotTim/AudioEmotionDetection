@@ -7,6 +7,7 @@
 ##      generateProfile(self): Creates new user profiles
 ##  More information regarding these methods are detailed above each method.
 ##  Unless otherwise specified, every method within this class was written by Timmothy Lane
+##  Related Software Requirements: FR.2, FR.7, FR.8
 
 from pathlib import Path
 import os.path
@@ -21,6 +22,7 @@ class profileManager:
 ##  a new profile object is created.
 ##  This method sets the file name and file path associated with a user
 ##  profile.
+##  Related Software Requirements: FR.7
     def __init__(self, userName):
         #If receieved userName is empty or null
         if userName == "" or userName == None:
@@ -40,6 +42,7 @@ class profileManager:
 ##   calls the generateProfile method if one does not.
 ##  Creates a dataframe from the user profile so that
 ##   the metrics can be easier accessed.
+##  Related Software Requirements: FR.8
     def accessProfile(self):
         # Use the path attribute to create a Path for the file
         self.file = Path(self.path)
@@ -61,6 +64,10 @@ class profileManager:
 ##  Outputs: None
 ##  The method updates the row of the user profile with the corrosponding emotion
 ##      with the new metrics
+##  Related Software Requirements: FR.2
+##  NOTE: This method overwrites the previous data and was depreciated for the
+##      new method "addtoProfile," which instead appends to the profile. This method
+##      was included for educational purposes.
     def writeToProfile(self, newMetrics, emotion):
         self.accessProfile()
         self.oldMetrics.loc[self.oldMetrics['Emotion'] == emotion, "Pitch"] = newMetrics[0]
@@ -74,6 +81,7 @@ class profileManager:
 ## Method for genereating a new .csv file for a new user.
 ##  Creates a new .csv and sets it's values to the same values
 ##  found in the generic user profile.
+##  Related Software Requirements: FR.7
     def generateProfile(self):
         # Create a dataframe holding the information of the generic profile using pandas
         generic = pandas.read_csv("profiles/generic.csv", header = None, sep = ',', names = ['Pitch', 'Tone', 'SPL', 'wordGap' , 'WordGapLen', 'Emotion'])
@@ -85,6 +93,7 @@ class profileManager:
 ##	Method that allows for data to be appended to a user profile while not overwriting
 ##		previous data
 ##	Written By: Bryan Jones
+##  Related Software Requirements: FR.2
     def addtoProfile(self, newMetric, emotion):
         with open(self.path, 'a') as f:
             fields = [newMetric[0], newMetric[1],newMetric[2],newMetric[3],newMetric[4], emotion]
