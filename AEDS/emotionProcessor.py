@@ -70,6 +70,10 @@ class EmotionProcessor(object):
         return(mfcc_feat)
     
         
+## Description: This function extracts the pitch of the audio file and puts it into a list of short term measurements from the file
+## Inputs:self
+## Outputs: array of the pitches for the short term chunks
+##Author: Alex Shannon
     def pitchProc(self):
         [Fs,x] = audioBasicIO.readAudioFile(self.fname)
         info=audioFeatureExtraction.stFeatureExtraction(x, Fs, 0.050*Fs, 0.025*Fs)
