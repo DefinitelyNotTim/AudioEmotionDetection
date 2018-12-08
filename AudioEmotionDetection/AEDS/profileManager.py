@@ -124,8 +124,8 @@ class profileManager:
         with open(self.path, 'a') as f:
             fields = [newMetric[0], newMetric[1],newMetric[2],newMetric[3],newMetric[4],newMetric[5],
             newMetric[6], newMetric[7],newMetric[8],newMetric[9],newMetric[10],newMetric[11],newMetric[12],
-            newMetric[13], newMetric[14],newMetric[15],newMetric[16],newMetric[17],newMetric[18],newMetrics[19],
-            newMetric[20], newMetric[21],newMetric[22],newMetric[23],newMetric[24],newMetric[25],newMetrics[26],
+            newMetric[13], newMetric[14],newMetric[15],newMetric[16],newMetric[17],newMetric[18],newMetric[19],
+            newMetric[20], newMetric[21],newMetric[22],newMetric[23],newMetric[24],newMetric[25],newMetric[26],
             newMetric[27], newMetric[28],newMetric[29],newMetric[30],newMetric[31],emotion]
             writer = csv.writer(f)
             writer.writerow(fields)

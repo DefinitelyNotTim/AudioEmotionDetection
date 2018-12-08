@@ -141,12 +141,13 @@ class EmotionProcessor(object):
         
         wordGap = self.gapProc()
         if(len(wordGap) != 0):
-            wordGaplen = [len(wordGap)]
-            wordGap = [stdev(wordGap)]
+            wordGaplen = np.asarray([len(wordGap)])
+            wordGap = np.asarray([stdev(wordGap)])
         else:
-            wordGaplen = [0]
-            wordGap = [0]
-
-        user_profile = np.array(pitch + tone + volume + wordGap + wordGaplen)
+            wordGaplen = np.asarray([0])
+            wordGap = np.asarray([0])
+        
+        user_profile = np.concatenate((pitch, tone, volume, wordGap, wordGaplen), axis = 0)
+        
         return(user_profile)
         
