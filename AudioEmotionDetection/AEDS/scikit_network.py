@@ -16,10 +16,10 @@ def compare_new(new_metrics, user_profile):
 
     data = df.values
     y = df['Emotion']
-    X = df['Pitch1','Pitch2','Pitch3','Pitch4','Pitch5','Pitch6','Pitch7','Pitch8','Pitch9','Pitch10',
+    X = df[['Pitch1','Pitch2','Pitch3','Pitch4','Pitch5','Pitch6','Pitch7','Pitch8','Pitch9','Pitch10',
         'Tone1','Tone2','Tone3','Tone4','Tone5','Tone6','Tone7','Tone8','Tone9','Tone10',
         'SPL1','SPL2','SPL3','SPL4','SPL5','SPL6','SPL7','SPL8','SPL9','SPL10',
-        'wordGap','WordGapLen']
+        'wordGap','WordGapLen']]
 
     knn = KNeighborsClassifier(n_neighbors=1) #uses k nearest neighbor to find closest example
 
