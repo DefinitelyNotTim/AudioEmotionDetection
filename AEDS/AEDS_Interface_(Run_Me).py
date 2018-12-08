@@ -89,7 +89,7 @@ class Application(Frame):
         
         #this function was written by Alex
     def recordAudio(self):
-        if(self.recordingtest)==True):
+        if(self.recordingtest == True):
 	        print("Already Recording!")
         else:
 	        self.recorder=Recording.Recording(wave_output_filename, CHANNELS, RATE,CHUNK)
